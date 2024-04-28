@@ -1,0 +1,118 @@
+/*---------------------------------------------------
+Name: Samuel Pino
+Student ID: 4000358810
+COP 2800 â€“ Java Programming
+Spring 2024 â€“ Tu 5:30 PM â€“ 8:50 PM
+Assignment #
+Plagiarism Statement
+I certify that this assignment is my own work and that I have not
+copied in part or whole or otherwise plagiarized the work of other
+students, persons, Generative Pre-trained Generators (GPTs) or any other AI tools.
+I understand that students involved in academic dishonesty will face
+disciplinary sanctions in accordance with the College's Student Rights
+and Responsibilities Handbook (https://www.mdc.edu/rightsandresponsibilities)
+01234567890120123456789012345678901234567890123456789345678901234567890123456789
+----------------------------------------------------------*/
+
+import java.util.Scanner;
+
+public class Assignment1 {
+  public static void main(String[] args) {
+    Scanner input = new Scanner(System.in);
+    double amount = 0;
+    int cant;
+    int option;
+    int missinput = 0;    
+
+    System.out.println("Hola, distinguished space traveler!\nSpace Voyagers Inc. wants to travel with you!\n");
+
+    do{
+      System.out.println("Choose your interplanetary adventure:");
+      System.out.println("1 - Purchase SVI ZEPHYR SMs");
+      System.out.println("2 - Purchase SVI TITAN SMs");
+      System.out.println("3 - Exit Program\n");
+
+      System.out.print("Please enter your choice: ");
+      option = input.nextInt();
+
+      if(option == 1){
+        System.out.println("\nYou have selected SVI ZEPHYR Spacecraft Modules.");
+        System.out.print("How many SVI ZEPHYR SMs would you like to purchase? ");
+
+        cant = input.nextInt();
+
+        if (cant > 0 && cant <= 5){
+          amount = cant * 1.5;
+          System.out.println("\nCalculating your total...\n");
+          System.out.println("For " + cant + " SVI ZEPHYR SMs, your total is " + amount + " million.");
+          System.out.println("Thank you for being a loyal costumer. Wonderful space travels await you inside SVI ZEPHYR SMs!\n");
+        }
+        else if (cant > 5){
+          System.out.println("\nCalculating your total...\n");
+          System.out.println("For " + cant + " SVI ZEPHYR SMs, your total is " + (double)cant + " million.");
+          System.out.println("Thank you for being a loyal costumer. Wonderful space travels await you inside SVI ZEPHYR SMs!\n");
+        }
+        else{
+
+          if (missinput == 5){
+            break;
+          }
+          while (cant <= 0){
+            missinput = missinput + 1;
+            if (missinput == 5){
+              break;
+            }
+            System.out.println("\nPlease enter a valid amount.");
+            System.out.print("How many ships would you like to purchase? ");
+
+            cant = input.nextInt(); 
+          } 
+        }
+      }
+      else if(option == 2){
+        System.out.println("\nYou have selected SVI TITAN Spacecraft Modules.");
+        System.out.print("How many SVI TITAN SMs would you like to purchase? "); 
+
+        cant = input.nextInt();
+
+        if (cant > 0 && cant <= 5){
+          amount = cant * 2.5;
+          System.out.println("\nCalculating your total...\n");
+          System.out.println("For " + cant + " SVI TITAN SMs, your total is " + amount + " million.");
+          System.out.println("Thank you for choosing us. Reach the speed of light in your SVI TITAN SMs!\n");
+
+        }
+        else if (cant > 5){
+          amount = cant * 2.0;
+          System.out.println("\nCalculating your total...\n");
+          System.out.println("For " + cant + " SVI TITAN SMs, your total is " + amount + " million.");
+          System.out.println("Thank you for choosing us. Reach the speed of light in your SVI TITAN SMs!\n");
+        }
+        else{
+
+          if (missinput == 5){
+            break;
+          }
+          while (cant <= 0){
+            missinput = missinput + 1;
+            if (missinput == 5){
+              break;
+            }
+            System.out.println("\nPlease enter a valid amount.");
+            System.out.print("How many ships would you like to purchase? ");
+
+            cant = input.nextInt(); 
+          } 
+        }
+      }
+      else if (option != 1 && option != 2 && option != 3){
+        missinput = missinput + 1;
+        if (missinput < 5){
+          System.out.println("\nPlease enter a valid option!.\n");
+        }
+      }
+
+    } while (option != 3 && missinput != 5);
+    System.out.println("\nThank you for visiting! Goodbye!");
+  }
+}
