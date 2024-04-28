@@ -1,0 +1,139 @@
+/*---------------------------------------------------
+Name: Samuel Pino
+Student ID: 4000358810
+COP 2800 â€“ Java Programming
+Spring 2024 â€“ Tu 5:30 PM â€“ 8:50 PM
+Assignment # 2
+Plagiarism Statement
+I certify that this assignment is my own work and that I have not
+copied in part or whole or otherwise plagiarized the work of other
+students, persons, Generative Pre-trained Generators (GPTs) or any other AI tools.
+I understand that students involved in academic dishonesty will face
+disciplinary sanctions in accordance with the College's Student Rights
+and Responsibilities Handbook (https://www.mdc.edu/rightsandresponsibilities)
+0123456789012345678901234567890123456789
+----------------------------------------------------------*/
+
+import java.util.Scanner;
+
+public class DietLogger{ 
+  public static void calculateAverageDaily(double[][] caloriesArray, String[] weekDays, String[] mealTimes){
+    Scanner input = new Scanner(System.in);
+    int days = 7;
+    int meals = 4;
+    double averagePerDay = 0;
+
+    for(days = 0; days < caloriesArray.length; days++){
+      averagePerDay = 0;
+      for(meals = 0; meals < caloriesArray[0].length; meals++){
+        averagePerDay += caloriesArray[days][meals];  
+      }
+      System.out.println("The average calories consumed on " + weekDays[days] + ": " + averagePerDay / 4 + "\n");
+    }
+  }
+  public static void calculateAverageIntakePerMeal(double[][] caloriesArray, String[] weekDays, String[] mealTimes){
+    Scanner input = new Scanner(System.in);
+    int days = 7;
+    int meals = 4;
+    double averagePerMeal = 0;
+
+    for(meals = 0; meals < caloriesArray[0].length; meals++){
+      averagePerMeal = 0;
+      
+      for(days = 0; days < caloriesArray.length; days++){
+        averagePerMeal += caloriesArray[days][meals];
+      
+      }
+      System.out.println("The average calories consumed during " + mealTimes[meals] + " through the week was: " + Math.round(averagePerMeal / 7) + "\n");
+    
+    }
+  }
+  public static void calculateDailyIntake(double[][] caloriesArray, String[] weekDays, String[] mealTimes){
+    Scanner input = new Scanner(System.in);
+    int days = 7;
+    int meals = 4;
+    double totalDaily = 0;
+
+    for(days = 0; days < caloriesArray.length; days++){
+      totalDaily = 0;
+      for(meals = 0; meals < caloriesArray[0].length; meals++){
+        totalDaily += caloriesArray[days][meals];  
+      }
+      System.out.println("Total calories consumed on " + weekDays[days] + ": " + totalDaily + "\n");
+    }
+  }
+  public static void getInput(double[][] caloriesArray, String[] weekDays, String[] mealTimes){
+    Scanner scanner = new Scanner(System.in);
+    int days = 7;
+    int meals = 4;
+    double total = 0;
+    
+    for(days = 0; days < caloriesArray.length; days++){
+      if(days > 0){
+        System.out.println();
+      }
+      for(meals = 0; meals < caloriesArray[0].length; meals++){
+        do{  
+          System.out.print("Enter the calories for " + weekDays[days] + " at " + mealTimes[meals] + ": ");
+          caloriesArray[days][meals] = scanner.nextDouble();
+
+          if(caloriesArray[days][meals] < 0){
+            System.out.println("The amount of calories has to be at least 0 if you skipped the meal.");
+          }
+          
+        }while(caloriesArray[days][meals] < 0);
+      }
+    }
+  }
+  public static void smallestMeal(double[][] caloriesArray, String[] weekDays, String[] mealTimes){
+    Scanner scanner = new Scanner(System.in);
+    double smaller = caloriesArray[0][0];
+    int days, meals;
+    int date = 0;
+    int meal = 0;
+    
+    for(days = 0; days < caloriesArray.length; days++){
+      for(meals = 0; meals < caloriesArray[0].length; meals++){
+        if(caloriesArray[days][meals] < smaller){
+          smaller = caloriesArray[days][meals];
+          date = days;
+          meal = meals;
+        }
+      }
+    }
+    System.out.println("\n" + "The day you had the meal with the least calories was a " + weekDays[date] + ", and the meal was a : " + mealTimes[meal] + "\n");
+  }
+  public static void biggestMeal(double[][] caloriesArray, String[] weekDays, String[] mealTimes){
+    Scanner scanner = new Scanner(System.in);
+    double bigger = caloriesArray[0][0];
+    int days, meals;
+    int date = 0;
+    int meal = 0;
+
+    for(days = 0; days < caloriesArray.length; days++){
+      for(meals = 0; meals < caloriesArray[0].length; meals++){
+        if(caloriesArray[days][meals] > bigger){
+          bigger = caloriesArray[days][meals];
+          date = days;
+          meal = meals;
+        }
+      }
+    }
+    System.out.println("The day you had the meal with the most calories was a " + weekDays[date] + ", and the meal was a : " + mealTimes[meal] + "\n");
+  }
+  
+  public static void main(String[] args){
+    double[][] caloriesArray = new double[7][4];
+    String[] weekDays = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+    String[] mealTimes = {"Breakfast", "Lunch", "Dinner", "Snack"};
+    
+    System.out.println("DietLogger will give an accurate report of your calorie intake for the week. These insights are valuable for your development. Commencing Sunday, input the calories you ate during each meal or snack.\n");
+
+    getInput(caloriesArray, weekDays, mealTimes);
+    smallestMeal(caloriesArray, weekDays, mealTimes);
+    biggestMeal(caloriesArray, weekDays, mealTimes);
+    calculateDailyIntake(caloriesArray, weekDays, mealTimes);
+    calculateAverageIntakePerMeal(caloriesArray, weekDays, mealTimes);
+    calculateAverageDaily(caloriesArray, weekDays, mealTimes);
+  }
+}
